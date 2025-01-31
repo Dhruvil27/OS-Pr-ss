@@ -1,0 +1,37 @@
+echo "Student Marksheet"
+echo "------------------"
+
+echo "Enter Marks of Operating System:"
+read os
+
+echo "Enter Marks of OOP-1:"
+read oop
+
+echo "Enter Marks of COA:"
+read coa
+
+echo "-----------------------"
+
+
+total=$((os + oop + coa))
+
+echo "Total Marks: $total"
+
+
+percentage=$((total / 3))
+
+echo "Percentage: $percentage%"
+
+
+if [ $percentage -ge 60 ]; 
+then
+    echo "Class: First Class Distinction"
+elif [ $percentage -ge 50 ]; 
+then
+    echo "Class: First Class"
+elif [ $percentage -ge 40 ]; 
+then
+    echo "Class: Second Class"
+else
+    echo "Class: Fail"
+fi
