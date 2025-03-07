@@ -1,0 +1,21 @@
+clear
+
+
+while true; do
+    echo "1. Date and Time"
+    echo "2. System Info"
+    echo "3. List Files"
+    echo "4. Disk Usage"
+    echo "5. Exit"
+    echo -n "Select an option: "
+    read option
+
+    case $option in
+        1) date ;;
+        2) uname -a ;;
+        3) ls -l ;;
+        4) df -h ;;
+        5) echo "Exiting..."; break ;;
+        *) echo "Invalid option. Try again." ;;
+    esac
+done
