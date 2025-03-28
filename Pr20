@@ -1,0 +1,79 @@
+#!/bin/bash
+
+echo "=== AWK Function Demonstration ==="
+echo "1. String Functions"
+echo "2. Mathematical Functions"
+echo "3. Time Functions (gawk only)"
+echo "4. I/O Functions"
+echo "5. General/Utility Functions"
+echo "6. Exit"
+read -p "Choose an option (1-6): " choice
+
+case $choice in
+1) 
+    echo "String Functions:"
+    echo "Enter a string:"
+    read str
+    awk -v str="$str" 'BEGIN {
+        print "Original String: " str
+        print "Length: " length(str)
+        print "Uppercase: " toupper(str)
+        print "Lowercase: " tolower(str)
+        print "Substring (2, 3): " substr(str, 2, 3)
+        print "Index of \"a\": " index(str, "a")
+        split(str, arr, " ")
+        print "Splitting words:"
+        for (i in arr) print arr[i]
+    }'
+    ;;
+2)
+    echo "Mathematical Functions:"
+    awk 'BEGIN {
+        print "Sine of 45 degrees: " sin(45 * 3.14159 / 180)
+        print "Cosine of 45 degrees: " cos(45 * 3.14159 / 180)
+        print "Square Root of 16: " sqrt(16)
+        print "Natural Logarithm of 10: " log(10)
+        print "Random Number: " rand()
+        srand()
+        print "Random Number after srand(): " rand()
+        print "Truncate 3.7 to integer: " int(3.7)
+    }'
+    ;;
+3)
+    echo "Time Functions (gawk only):"
+    awk 'BEGIN {
+        print "Current Time (Epoch): " systime()
+        print "Formatted Time: " strftime("%Y-%m-%d %H:%M:%S", systime())
+    }'
+    ;;
+4)
+    echo "I/O Functions:"
+    echo "Hello AWK" > temp.txt
+    awk 'BEGIN {
+        print "Reading from file:"
+        while ((getline line < "temp.txt") > 0) print line
+        close("temp.txt")
+        system("rm temp.txt")
+    }'
+    ;;
+5)
+    echo "General/Utility Functions:"
+    awk 'BEGIN {
+        a[1] = "Hello"; a[2] = "World"
+        print "Array before deletion:"
+        for (i in a) print a[i]
+        delete a[1]
+        print "Array after deletion:"
+        for (i in a) print a[i]
+        print "Exit Status: "; exit 0
+    }'
+    ;;
+6)
+    echo "Exiting..."
+    exit 0
+    ;;
+*)
+    echo "Invalid choice! Exiting..."
+    exit 1
+    ;;
+esac
